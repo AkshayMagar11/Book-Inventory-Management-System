@@ -28,45 +28,66 @@ public class Main {
                                 String title = scanner.nextLine();
                                 System.out.println("Enter author:");
                                 String author = scanner.nextLine();
-                                System.out.println("Enter id:");
-                                int id = scanner.nextInt();
-                                System.out.println("Enter price:");
                                 try {
-                                    double price = Double.parseDouble(scanner.nextLine());
+                                    System.out.println("Enter id:");
+                                    int id = scanner.nextInt();
+                                    System.out.println("Enter price:");
+                                    double price = scanner.nextDouble();
+                                    scanner.nextLine();
                                     System.out.println("Enter category:");
                                     String category = scanner.nextLine();
                                     Book newBook = new Book(title, author, id, price, category);
                                     inventory.addBook(newBook);
                                     System.out.println("Book added successfully.");
                                 } catch (InputMismatchException e) {
-                                    System.out.println("An error occurred: Invalid price input.");
-                                    scanner.nextLine(); 
+                                    System.out.println("An error occurred: Invalid input.");
+                                    scanner.nextLine();
                                 }
                                 break;
                             case 2:
-                                System.out.println("Enter id of the book to update:");
-                                int updateId = scanner.nextInt();
-                                scanner.nextLine();
-                                System.out.println("Enter new title:");
-                                String newTitle = scanner.nextLine();
-                                System.out.println("Enter new author:");
-                                String newAuthor = scanner.nextLine();
-                                System.out.println("Enter new price:");
-                                double newPrice = scanner.nextDouble();
-                                scanner.nextLine();
-                                System.out.println("Enter new category:");
                                 try {
+                                    System.out.println("Enter id of the book to update:");
+                                    int updateId = scanner.nextInt();
+                                    scanner.nextLine();
+
+                                    // Retrieve the existing book details
+                                    Book existingBook = inventory.getBookById(updateId);
+
+                                    System.out.println("Enter new title ");
+                                    String newTitle = scanner.nextLine();
+                                    if (newTitle.isEmpty() || newTitle.equalsIgnoreCase("null")) {
+                                        newTitle = existingBook.getTitle();
+                                    }
+
+                                    System.out
+                                            .println("Enter new author :");
+                                    String newAuthor = scanner.nextLine();
+                                    if (newAuthor.isEmpty() || newAuthor.equalsIgnoreCase("null")) {
+                                        newAuthor = existingBook.getAuthor();
+                                    }
+
+                                    System.out.println("Enter new price:");
+                                    String newPriceInput = scanner.nextLine();
+                                    Double newPrice;
+                                    if (newPriceInput.isEmpty() || newPriceInput.equalsIgnoreCase("null")) {
+                                        newPrice = existingBook.getPrice();
+                                    } else {
+                                        newPrice = Double.parseDouble(newPriceInput);
+                                    }
+
+                                    System.out.println(
+                                            "Enter new category :");
                                     String newCategory = scanner.nextLine();
+                                    if (newCategory.isEmpty() || newCategory.equalsIgnoreCase("null")) {
+                                        newCategory = existingBook.getCategory();
+                                    }
+
                                     Book updatedBook = new Book(newTitle, newAuthor, updateId, newPrice, newCategory);
                                     inventory.updateBook(updateId, updatedBook);
-                                    System.out.println("Book updated successfully.");
                                 } catch (InputMismatchException e) {
                                     System.out.println("An error occurred: Invalid input.");
                                     scanner.nextLine();
                                 }
-                                String newCategory = scanner.nextLine();
-                                Book updatedBook = new Book(newTitle, newAuthor, updateId, newPrice, newCategory);
-                                inventory.updateBook(updateId, updatedBook);
                                 System.out.println("Book updated successfully.");
                                 break;
                             case 3:
