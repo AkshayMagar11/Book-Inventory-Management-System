@@ -8,16 +8,31 @@ import java.util.Map;
 public class Inventory {
     public List<Book> books = new ArrayList<Book>();;
     public Map<String , List<Book>> category = new HashMap<String , List<Book>>();
-    public void addBook(Book book) {
-        books.add(book);
-        if (category.containsKey(book.getCategory())) {
-            category.get(book.getCategory()).add(book);
-        } else {
-            List<Book> list = new ArrayList<Book>();
-            list.add(book);
-            category.put(book.getCategory(), list);
+
+//    public void addBook(Book book) {
+//        books.add(book);
+//        if (category.containsKey(book.getCategory())) {
+//            category.get(book.getCategory()).add(book);
+//        } else {
+//            List<Book> list = new ArrayList<Book>();
+//            list.add(book);
+//            category.put(book.getCategory(), list);
+//        }
+//    }
+
+    public Boolean addBook(Book book) {
+        for (Book b : books) {
+            if (b.getId() == book.getId()) {
+                System.out.println("Book with ID " + book.getId() + " already exists.");
+                return false;
+            }
         }
+        books.add(book);
+        category.computeIfAbsent(book.getCategory(), k -> new ArrayList<>()).add(book);
+        return true;
     }
+
+
     public void removeBook(int bookId) {
         Book bookToRemove = null;
         for (Book book : books) {
@@ -53,8 +68,13 @@ public class Inventory {
     }
 
     public List<Book> searchByCategory(String category) {
-        return this.category.get(category);
+        return this.category.getOrDefault(category, new ArrayList<>());
+
     }
+
+
+
+
     public List<Book> getBooks() {
         return books;
     }

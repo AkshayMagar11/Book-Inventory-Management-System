@@ -37,8 +37,9 @@ public class Main {
                                     System.out.println("Enter category:");
                                     String category = scanner.nextLine();
                                     Book newBook = new Book(title, author, id, price, category);
-                                    inventory.addBook(newBook);
-                                    System.out.println("Book added successfully.");
+                                   Boolean success= inventory.addBook(newBook);
+                                   if(success){
+                                    System.out.println("Book added successfully.");}
                                 } catch (InputMismatchException e) {
                                     System.out.println("An error occurred: Invalid input.");
                                     scanner.nextLine();
@@ -107,8 +108,7 @@ public class Main {
                             case 5:
                                 System.out.println("All books in inventory:");
                                 for (Book book : inventory.getBooks()) {
-                                    System.out.println(book.getTitle() + " by " + book.getAuthor() + " in "
-                                            + book.getCategory() + " category");
+                                    System.out.println(book);
                                 }
                                 break;
                             case 6:
