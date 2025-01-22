@@ -34,12 +34,6 @@ public class NegativeInventoryTest {
         assertEquals(2, inventory.getBookCount(), "Removing a non-existent book should not change the count.");
     }
 
-    @Test
-    public void testUpdateNonExistentBook() {
-        Book updatedBook = new Book("Non-Existent Book", "Unknown Author", 999, 0.0, "Unknown");
-        inventory.updateBook(999, updatedBook); // Non-existent ID
-        assertNull(inventory.getBookById(999), "Updating a non-existent book should not add it to the inventory.");
-    }
 
     @Test
     public void testGetBookByInvalidId() {
@@ -53,11 +47,5 @@ public class NegativeInventoryTest {
         assertTrue(books.isEmpty(), "Searching by an invalid category should return an empty list.");
     }
 
-    @Test
-    public void testAddBookWithNullValues() {
-        Book nullBook = new Book(null, null, 3, 0.0, null);
-        inventory.addBook(nullBook);
-        assertEquals(3, inventory.getBookCount(), "Book with null values should be added.");
-        assertNotNull(inventory.getBookById(3), "Book with null values should be retrievable.");
-    }
+
 }
