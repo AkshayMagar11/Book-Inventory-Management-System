@@ -4,11 +4,19 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+// DataStructure used is List And Map List is used to store a list of book and Map is used to implement
+// search by category as key is category and value is list of books
 public class Inventory {
-    public List<Book> books = new ArrayList<Book>();;
+    private static Inventory instance;
+    public List<Book> books = new ArrayList<Book>();
     public Map<String , List<Book>> category = new HashMap<String , List<Book>>();
-
+    private Inventory() {}
+    public static Inventory getInstance() {
+        if (instance == null) {
+            instance = new Inventory();
+        }
+        return instance;
+    }
 
     public Boolean addBook(Book book) {
         for (Book b : books) {
@@ -21,8 +29,7 @@ public class Inventory {
         category.computeIfAbsent(book.getCategory(), k -> new ArrayList<>()).add(book);
         return true;
     }
-
-
+// Remove method to remove a book from list and map category
     public void removeBook(int bookId) {
         Book bookToRemove = null;
         for (Book book : books) {
@@ -36,6 +43,7 @@ public class Inventory {
             category.get(bookToRemove.getCategory()).remove(bookToRemove);
         }
     }
+    // This method allows to update the book details by taking id of the book and updated book object
     public void updateBook(int id, Book updatedBook) {
         Book bookToUpdate = null;
         for (Book book : books) {
@@ -56,15 +64,11 @@ public class Inventory {
             addBook(finalUpdatedBook);
         }
     }
-
+// This function implements search by category where we return list of books for a given category
     public List<Book> searchByCategory(String category) {
         return this.category.getOrDefault(category, new ArrayList<>());
 
     }
-
-
-
-
     public List<Book> getBooks() {
         return books;
     }
@@ -81,5 +85,8 @@ public class Inventory {
     }
     public List<String> getCategories() {
         return new ArrayList<String>(category.keySet());
+    }
+    public Map<String, List<Book>> getCategoriesMap() {
+        return category;
     }
 }

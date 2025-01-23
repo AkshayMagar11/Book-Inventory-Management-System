@@ -16,7 +16,9 @@ public class InventoryTest {
 
     @BeforeEach
     public void setUp() {
-        inventory = new Inventory();
+        inventory = Inventory.getInstance();
+        inventory.getBooks().clear();
+        inventory.getCategoriesMap().clear();
         book1 = new Book("Book One", "Author One", 1, 25.98,  "Fiction");
         book2 = new Book("Book Two", "Author Two", 2 , 98.45, "Non-Fiction");
         inventory.addBook(book1);

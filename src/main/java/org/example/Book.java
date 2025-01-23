@@ -1,13 +1,13 @@
 package org.example;
 
-
+// Encapsulation is implemented over book objects
 public class Book {
     private String title;
     private String author;
     private int id;
     private Double price;
     private String category;
-
+// Parametrized Constructor
     public Book(String title, String author, int id, Double price, String category) {
         setTitle(title);
         setAuthor(author);
@@ -15,7 +15,7 @@ public class Book {
         setPrice(price);
         setCategory(category);
     }
-
+// Getters and Setters for the fields
     public String getTitle() {
         return title;
     }
