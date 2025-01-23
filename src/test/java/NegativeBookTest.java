@@ -7,29 +7,37 @@ public class NegativeBookTest {
     @Test
     public void testSetNullTitle() {
         Book book = new Book("Book Title", "Author Name", 1, 29.99, "Fiction");
-        book.setTitle(null);
-        assertNull(book.getTitle(), "Title should be null.");
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            book.setTitle(null);
+        });
+        assertEquals("Title cannot be null or empty.", exception.getMessage());
     }
 
     @Test
     public void testSetEmptyTitle() {
         Book book = new Book("Book Title", "Author Name", 1, 29.99, "Fiction");
-        book.setTitle("");
-        assertEquals("", book.getTitle(), "Title should be empty.");
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            book.setTitle("");
+        });
+        assertEquals("Title cannot be null or empty.", exception.getMessage());
     }
 
     @Test
     public void testSetNullAuthor() {
         Book book = new Book("Book Title", "Author Name", 1, 29.99, "Fiction");
-        book.setAuthor(null);
-        assertNull(book.getAuthor(), "Author should be null.");
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            book.setAuthor(null);
+        });
+        assertEquals("Author cannot be null or empty.", exception.getMessage());
     }
 
     @Test
     public void testSetEmptyAuthor() {
         Book book = new Book("Book Title", "Author Name", 1, 29.99, "Fiction");
-        book.setAuthor("");
-        assertEquals("", book.getAuthor(), "Author should be empty.");
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            book.setAuthor("");
+        });
+        assertEquals("Author cannot be null or empty.", exception.getMessage());
     }
 
     @Test
@@ -38,13 +46,15 @@ public class NegativeBookTest {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
             book.setId(-1);
         });
-        assertEquals("ID must be positive.", exception.getMessage());
+        assertEquals("ID must be positive", exception.getMessage());
     }
+
     @Test
     public void testSetNullPrice() {
-        Book book = new Book("Book Title", "Author Name", 1, 29.99, "Fiction");
-        book.setPrice(null);
-        assertNull(book.getPrice(), "Price should be null.");
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            new Book("Book Title", "Author Name", 1, null, "Fiction");
+        });
+        assertEquals("Price must be positive and not Null", exception.getMessage());
     }
 
     @Test
@@ -52,20 +62,24 @@ public class NegativeBookTest {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
             new Book("Book Title", "Author Name", 1, -29.99, "Fiction");
         });
-        assertEquals("Price must be positive.", exception.getMessage());
+        assertEquals("Price must be positive and not Null", exception.getMessage());
     }
 
     @Test
     public void testSetNullCategory() {
         Book book = new Book("Book Title", "Author Name", 1, 29.99, "Fiction");
-        book.setCategory(null);
-        assertNull(book.getCategory(), "Category should be null.");
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            book.setCategory(null);
+        });
+        assertEquals("Category cannot be null or empty.", exception.getMessage());
     }
 
     @Test
     public void testSetEmptyCategory() {
         Book book = new Book("Book Title", "Author Name", 1, 29.99, "Fiction");
-        book.setCategory("");
-        assertEquals("", book.getCategory(), "Category should be empty.");
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            book.setCategory("");
+        });
+        assertEquals("Category cannot be null or empty.", exception.getMessage());
     }
 }

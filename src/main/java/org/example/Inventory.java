@@ -9,16 +9,6 @@ public class Inventory {
     public List<Book> books = new ArrayList<Book>();;
     public Map<String , List<Book>> category = new HashMap<String , List<Book>>();
 
-//    public void addBook(Book book) {
-//        books.add(book);
-//        if (category.containsKey(book.getCategory())) {
-//            category.get(book.getCategory()).add(book);
-//        } else {
-//            List<Book> list = new ArrayList<Book>();
-//            list.add(book);
-//            category.put(book.getCategory(), list);
-//        }
-//    }
 
     public Boolean addBook(Book book) {
         for (Book b : books) {

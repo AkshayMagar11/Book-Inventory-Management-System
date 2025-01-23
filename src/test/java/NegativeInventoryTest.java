@@ -38,13 +38,13 @@ public class NegativeInventoryTest {
     @Test
     public void testGetBookByInvalidId() {
         Book book = inventory.getBookById(999); // Non-existent ID
-        assertNull(book, "Getting a book by an invalid ID should return null.");
+        assertNull(book, "Getting a book by an invalid ID returns null.");
     }
 
     @Test
     public void testSearchByInvalidCategory() {
         List<Book> books = inventory.searchByCategory("Unknown Category");
-        assertTrue(books.isEmpty(), "Searching by an invalid category should return an empty list.");
+        assertTrue(books.isEmpty(), "Searching by an invalid category returns an empty list.");
     }
 
 

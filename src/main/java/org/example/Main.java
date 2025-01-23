@@ -127,7 +127,6 @@ public class Main {
                         Thread.sleep(2000);
                     } catch (Exception e) {
                         System.out.println("An error occurred: " + e.getMessage());
-                        scanner.nextLine();
                     }
                 }
             } finally {
